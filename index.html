@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pairbot_sym</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Pairbot_Sym (β版)</h1>
+    <h3>click to make pairbot</h3>
+    <ul>
+      <li>端に行ったら死にます</li>
+      <li>左上、右下に行っても死にます</li>
+    </ul>
+    <canvas id="gridCanvas" width="900" height="600"></canvas>
+    <form id="round">
+      <input type="submit" value="act 1round" />
+    </form>
+    <form id="auto">
+      <input type="submit" value="auto" />
+    </form>
+    <p id="isrunning"></p>
+
+    <label
+      ><input
+        type="range"
+        id="speed"
+        min="0"
+        max="950"
+        value="750"
+      />speed</label
+    >
+    <br>
+
+    <select id="myAlgo" onchange="handleSelectChange(this)">
+      <option value="makeLine">直線形成</option>
+      <option value="maketriangle">直線から三角形</option>
+    </select>
+
+    <p id="output">SSYNCで任意の構成から直線になるアルゴリズム</p>
+
+    <select id="SYNC" onchange="handleSelectChange(this)">
+      <option value="FSYNC">FSYNC</option>
+      <option value="SSYNC">SSYNC</option>
+    </select>
+
+
+    <form id="all_delete">
+      <input type="submit" value="All_delete" />
+    </form>
+
+    <script src="Rule.js"></script>
+    <script src="Robot.js"></script>
+    <script src="Pairbot.js"></script>
+    <script src="canvas.js"></script>
+    <script src="main.js"></script>
+
+    <footer>
+      <small>
+        <center>Copyright © 2024 Yoshida Masaki. All Rights Reserved.</center>
+      </small>
+    </footer>
+  </body>
+</html>
