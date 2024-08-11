@@ -11,6 +11,7 @@ var intervalId;
 let nowAlgo = rules3;
 let SYNC = "F";
 let DD = "week";
+let isCheet = false;
 
 c.drawGrid();
 c.drawRobot();
@@ -30,6 +31,7 @@ canvas.addEventListener("click", function (event) {
     // Objectを作り直すしかないか？
     // console.log(pairArrayHistory);
   }
+  c.drawGrid();
   c.drawRobot();
 });
 
@@ -98,10 +100,9 @@ document.getElementById("auto").onsubmit = function (event) {
       roudn1,
       1000 - document.getElementById("speed").value
     ); // タイマーが停止している場合は開始する
-    document.getElementById("AAA").value = "AutoMode end";
+    document.getElementById("AAA").value = "AutoMode stop";
   }
 };
-
 
 let SyncSelect = document.getElementById("SYNC");
 SyncSelect.options[0].selected = true;
@@ -153,6 +154,18 @@ DDSelect.addEventListener("change", function () {
       window.alert("error: none of DD.value is selected");
   }
 });
+
+document.getElementById("cheet").onsubmit = function (event) {
+  event.preventDefault();
+  if (!isCheet) {
+    document.getElementById("cheetbotan").value = "Cheet OFF";
+  } else {
+    document.getElementById("cheetbotan").value = "Cheet ON";
+  }
+  isCheet = !isCheet;
+  c.drawGrid();
+  c.drawRobot();
+};
 
 // 仮
 function roudn1() {
@@ -228,6 +241,7 @@ function pairArrayToRrtb(pairArray) {
   }
 }
 
+// 簡易型 非連結で2グループを同時にやろうとすると終わる
 function isSolved() {
   let shortcount = [];
   for (let i = 0; i < pairArray.length; i++) {

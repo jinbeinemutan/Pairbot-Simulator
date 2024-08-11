@@ -74,8 +74,8 @@ class Canvas {
         for (let k = 0; k < rtb[i][j].length; k++) {
           if (rtb[i][j][k] != 0) {
             randomColor(rtb[i][j][k]);
-            let x = i - Math.floor(rtb_w/2);
-            let y = j - Math.floor(rtb_h/2);
+            let x = i - Math.floor(rtb_w / 2);
+            let y = j - Math.floor(rtb_h / 2);
             ctx.beginPath();
             ctx.arc(
               450 + a * (x * Math.round(Math.sqrt(3)) + y),
@@ -86,12 +86,15 @@ class Canvas {
             );
             ctx.stroke();
             ctx.fill();
-            ctx.fillStyle = "black";
-            ctx.fillText(
-              rtb[i][j][k],
-              450 + a * (x * Math.round(Math.sqrt(3)) + y),
-              300 - y * a * Math.sqrt(3) - pile * 10
-            );
+            if (isCheet) {
+              ctx.fillStyle = "black";
+              ctx.fillText(
+                rtb[i][j][k],
+                450 + a * (x * Math.round(Math.sqrt(3)) + y),
+                300 - y * a * Math.sqrt(3) - pile * 10
+              );
+            }
+
             pile++;
           }
         }
@@ -101,16 +104,20 @@ class Canvas {
 }
 
 function setrtb_relative(x, y, id) {
-  rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)].push(id);
+  rtb[x + Math.floor(rtb_w / 2)][y + Math.floor(rtb_h / 2)].push(id);
 }
 function getrtb_relative(x, y) {
-  return rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)];
+  return rtb[x + Math.floor(rtb_w / 2)][y + Math.floor(rtb_h / 2)];
 }
 
 function rm_relative(x, y, id) {
-  for (let i = 0; i < rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)].length; i++) {
-    if (rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)][i] == id) {
-      rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)].splice(i, 1);
+  for (
+    let i = 0;
+    i < rtb[x + Math.floor(rtb_w / 2)][y + Math.floor(rtb_h / 2)].length;
+    i++
+  ) {
+    if (rtb[x + Math.floor(rtb_w / 2)][y + Math.floor(rtb_h / 2)][i] == id) {
+      rtb[x + Math.floor(rtb_w / 2)][y + Math.floor(rtb_h / 2)].splice(i, 1);
       break;
     }
   }
