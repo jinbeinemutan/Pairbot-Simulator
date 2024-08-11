@@ -256,21 +256,42 @@ function isSolved() {
     return !(
       Math.abs(
         pairArray[shortcount[0]].robA.x - pairArray[shortcount[1]].robA.x
-      ) > 1 ||
+      ) +
+        Math.abs(
+          pairArray[shortcount[0]].robA.y - pairArray[shortcount[1]].robA.y
+        ) >
+        2 ||
       Math.abs(
         pairArray[shortcount[1]].robA.x - pairArray[shortcount[2]].robA.x
-      ) > 1 ||
+      ) +
+        Math.abs(
+          pairArray[shortcount[1]].robA.y - pairArray[shortcount[2]].robA.y
+        ) >
+        2 ||
       Math.abs(
         pairArray[shortcount[2]].robA.x - pairArray[shortcount[0]].robA.x
+      ) +
+        Math.abs(
+          pairArray[shortcount[2]].robA.y - pairArray[shortcount[0]].robA.y
+        ) >
+        2 ||
+      Math.abs(
+        pairArray[shortcount[0]].robA.x -
+          pairArray[shortcount[1]].robA.x +
+          pairArray[shortcount[0]].robA.y -
+          pairArray[shortcount[1]].robA.y
       ) > 1 ||
       Math.abs(
-        pairArray[shortcount[0]].robA.y - pairArray[shortcount[1]].robA.y
+        pairArray[shortcount[0]].robA.x -
+          pairArray[shortcount[2]].robA.x +
+          pairArray[shortcount[0]].robA.y -
+          pairArray[shortcount[2]].robA.y
       ) > 1 ||
       Math.abs(
-        pairArray[shortcount[1]].robA.y - pairArray[shortcount[2]].robA.y
-      ) > 1 ||
-      Math.abs(
-        pairArray[shortcount[2]].robA.y - pairArray[shortcount[0]].robA.y
+        pairArray[shortcount[2]].robA.x -
+          pairArray[shortcount[1]].robA.x +
+          pairArray[shortcount[2]].robA.y -
+          pairArray[shortcount[1]].robA.y
       ) > 1
     );
   } else {
