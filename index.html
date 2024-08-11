@@ -8,20 +8,18 @@
 
   <body>
     <h1>Pairbot_Sym (β版)</h1>
-    <h3>click to make pairbot</h3>
-    <ul>
-      <li>端に行ったら死にます</li>
-      <li>左上、右下に行っても死にます</li>
-    </ul>
+    <h3>click to arrange a pairbot below</h3>
     <canvas id="gridCanvas" width="900" height="600"></canvas>
+    <br />
     <form id="round">
       <input type="submit" value="act 1round" />
     </form>
+    <!-- <form id="undo">
+      <input type="submit" value="undo" />
+    </form> -->
     <form id="auto">
       <input type="submit" value="auto" />
     </form>
-    <p id="isrunning"></p>
-
     <label
       ><input
         type="range"
@@ -31,24 +29,29 @@
         value="750"
       />speed</label
     >
+    <br />
+    <p id="isrunning"></p>
+    <form id="all_delete">
+      <input type="submit" value="All_delete" />
+    </form>
     <br>
 
-    <select id="myAlgo" onchange="handleSelectChange(this)">
+    <select id="myAlgo">
+      <option value="leaderElection">リーダー選挙問題</option>
       <option value="makeLine">直線形成</option>
       <option value="maketriangle">直線から三角形</option>
     </select>
 
-    <p id="output">SSYNCで任意の構成から直線になるアルゴリズム</p>
-
-    <select id="SYNC" onchange="handleSelectChange(this)">
+    <select id="SYNC">
       <option value="FSYNC">FSYNC</option>
       <option value="SSYNC">SSYNC</option>
+      <option value="ASYNC">ASYNC</option>
     </select>
 
-
-    <form id="all_delete">
-      <input type="submit" value="All_delete" />
-    </form>
+    <select id="DuplicationDetection">
+      <option value="strongDD">弱重複検知</option>
+      <option value="weekDD">強重複検知</option>
+    </select>
 
     <script src="Rule.js"></script>
     <script src="Robot.js"></script>

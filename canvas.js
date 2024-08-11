@@ -8,12 +8,12 @@ let rtb;
 class Canvas {
   constructor() {
     //make rtb[x][y][N_robot]
-    rtb = new Array(15);
-    for (let i = 0; i < 15; i++) {
-      rtb[i] = new Array(11);
+    rtb = new Array(21); //21
+    for (let i = 0; i < 21; i++) {
+      rtb[i] = new Array(13);
     }
-    for (let i = 0; i < 15; i++) {
-      for (let j = 0; j < 11; j++) {
+    for (let i = 0; i < 21; i++) {
+      for (let j = 0; j < 13; j++) {
         rtb[i][j] = new Array(1).fill(0);
       }
     }
@@ -72,8 +72,8 @@ class Canvas {
         for (let k = 0; k < rtb[i][j].length; k++) {
           if (rtb[i][j][k] != 0) {
             randomColor(rtb[i][j][k]);
-            let x = i - 7;
-            let y = j - 5;
+            let x = i - 10;
+            let y = j - 6;
             ctx.beginPath();
             ctx.arc(
               450 + a * (x * Math.round(Math.sqrt(3)) + y),
@@ -84,6 +84,12 @@ class Canvas {
             );
             ctx.stroke();
             ctx.fill();
+            ctx.fillStyle = "#ffffff";
+            ctx.fillText(
+              rtb[i][j][k],
+              450 + a * (x * Math.round(Math.sqrt(3)) + y),
+              300 - y * a * Math.sqrt(3) - pile * 10
+            );
             pile++;
           }
         }
@@ -93,16 +99,16 @@ class Canvas {
 }
 
 function setrtb_relative(x, y, id) {
-  rtb[x + 7][y + 5].push(id);
+  rtb[x + 10][y + 6].push(id);
 }
 function getrtb_relative(x, y) {
-  return rtb[x + 7][y + 5];
+  return rtb[x + 10][y + 6];
 }
 
 function rm_relative(x, y, id) {
-  for (let i = 0; i < rtb[x + 7][y + 5].length; i++) {
-    if (rtb[x + 7][y + 5][i] == id) {
-      rtb[x + 7][y + 5].splice(i, 1);
+  for (let i = 0; i < rtb[x + 10][y + 6].length; i++) {
+    if (rtb[x + 10][y + 6][i] == id) {
+      rtb[x + 10][y + 6].splice(i, 1);
       break;
     }
   }

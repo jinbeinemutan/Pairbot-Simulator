@@ -4,26 +4,15 @@ class Pairbot {
     this.robB = new Robot(x, y, id);
     this.isLong = false;
     this.isActivate = false;
+    this.AsyncPhase = 0;
   }
 
   pairLookPhase() {
-    // if (this.isLong) {
-    //   //short
-    //   this.robA.lookPhase();
-    // } else {
-    //   this.robB.lookPhase();
-    // }
     this.robA.lookPhase();
     this.robB.lookPhase();
   }
 
   pairComputePhase() {
-    // if (this.isLong) {
-    //   //short
-    //   this.robA.computePhase();
-    // } else {
-    //   this.robB.computePhase();
-    // }
     this.robA.computePhase();
     this.robB.computePhase();
   }
@@ -38,5 +27,24 @@ class Pairbot {
     if (isMoveA || isMoveB) {
       this.isLong = !this.isLong;
     }
+  }
+
+  setisLong() {
+    this.isLong = this.robA.x != this.robB.x || this.robA.y != this.robB;
+  }
+
+  ActAsyncPhase() {
+    switch (this.AsyncPhase) {
+      case 0:
+        this.pairLookPhase();
+        break;
+      case 1:
+        this.pairComputePhase();
+        break;
+      case 2:
+        this.pairMovePhase();
+        break;
+    }
+    this.AsyncPhase = (this.AsyncPhase + 1) % 3;
   }
 }
