@@ -3,17 +3,19 @@ const w = 900;
 const h = 600;
 const a = 30; //1:2:Math.sqrt(3)の1
 const w_ofset = ((h / 2) * Math.sqrt(3)) / 3;
+const rtb_h = 17;
+const rtb_w = 25;
 let rtb;
 
 class Canvas {
   constructor() {
     //make rtb[x][y][N_robot]
-    rtb = new Array(21); //21
-    for (let i = 0; i < 21; i++) {
-      rtb[i] = new Array(13);
+    rtb = new Array(rtb_w); //21
+    for (let i = 0; i < rtb_w; i++) {
+      rtb[i] = new Array(rtb_h);
     }
-    for (let i = 0; i < 21; i++) {
-      for (let j = 0; j < 13; j++) {
+    for (let i = 0; i < rtb_w; i++) {
+      for (let j = 0; j < rtb_h; j++) {
         rtb[i][j] = new Array(1).fill(0);
       }
     }
@@ -72,8 +74,8 @@ class Canvas {
         for (let k = 0; k < rtb[i][j].length; k++) {
           if (rtb[i][j][k] != 0) {
             randomColor(rtb[i][j][k]);
-            let x = i - 10;
-            let y = j - 6;
+            let x = i - Math.floor(rtb_w/2);
+            let y = j - Math.floor(rtb_h/2);
             ctx.beginPath();
             ctx.arc(
               450 + a * (x * Math.round(Math.sqrt(3)) + y),
@@ -84,7 +86,7 @@ class Canvas {
             );
             ctx.stroke();
             ctx.fill();
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = "black";
             ctx.fillText(
               rtb[i][j][k],
               450 + a * (x * Math.round(Math.sqrt(3)) + y),
@@ -99,16 +101,16 @@ class Canvas {
 }
 
 function setrtb_relative(x, y, id) {
-  rtb[x + 10][y + 6].push(id);
+  rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)].push(id);
 }
 function getrtb_relative(x, y) {
-  return rtb[x + 10][y + 6];
+  return rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)];
 }
 
 function rm_relative(x, y, id) {
-  for (let i = 0; i < rtb[x + 10][y + 6].length; i++) {
-    if (rtb[x + 10][y + 6][i] == id) {
-      rtb[x + 10][y + 6].splice(i, 1);
+  for (let i = 0; i < rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)].length; i++) {
+    if (rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)][i] == id) {
+      rtb[x + Math.floor(rtb_w/2)][y + Math.floor(rtb_h/2)].splice(i, 1);
       break;
     }
   }

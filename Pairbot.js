@@ -47,4 +47,8 @@ class Pairbot {
     }
     this.AsyncPhase = (this.AsyncPhase + 1) % 3;
   }
+
+  getIsLong(){
+    return this.isLong;
+  }
 }

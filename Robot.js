@@ -94,74 +94,32 @@ class Robot {
             this.nextgo[1] = nowAlgo[i][9];
             switch (i) {
               case 12:
-                if (
-                  (this.lookCoord2[1] == 0 &&
-                    this.lookCoord2[0] == 0 &&
-                    this.lookCoord2[11] == 0) ||
-                  (this.lookCoord2[3] == 0 &&
-                    this.lookCoord2[4] == 0 &&
-                    this.lookCoord2[5] == 0)
-                ) {
+                if (this.lookCoord2[1] < 2 || this.lookCoord2[3] < 2) {
                   this.nextgo = [0, 0];
                 }
                 break;
               case 13:
-                if (
-                  (this.lookCoord2[3] == 0 &&
-                    this.lookCoord2[2] == 0 &&
-                    this.lookCoord2[1] == 0) ||
-                  (this.lookCoord2[5] == 0 &&
-                    this.lookCoord2[6] == 0 &&
-                    this.lookCoord2[7] == 0)
-                ) {
+                if (this.lookCoord2[3] < 2 || this.lookCoord2[5] < 2) {
                   this.nextgo = [0, 0];
                 }
                 break;
               case 14:
-                if (
-                  (this.lookCoord2[5] == 0 &&
-                    this.lookCoord2[4] == 0 &&
-                    this.lookCoord2[3] == 0) ||
-                  (this.lookCoord2[7] == 0 &&
-                    this.lookCoord2[8] == 0 &&
-                    this.lookCoord2[9] == 0)
-                ) {
+                if (this.lookCoord2[5] < 2 || this.lookCoord2[7] < 2) {
                   this.nextgo = [0, 0];
                 }
                 break;
               case 15:
-                if (
-                  (this.lookCoord2[7] == 0 &&
-                    this.lookCoord2[6] == 0 &&
-                    this.lookCoord2[5] == 0) ||
-                  (this.lookCoord2[9] == 0 &&
-                    this.lookCoord2[10] == 0 &&
-                    this.lookCoord2[11] == 0)
-                ) {
+                if (this.lookCoord2[7] < 2 || this.lookCoord2[9] < 2) {
                   this.nextgo = [0, 0];
                 }
                 break;
               case 16:
-                if (
-                  (this.lookCoord2[9] == 0 &&
-                    this.lookCoord2[8] == 0 &&
-                    this.lookCoord2[7] == 0) ||
-                  (this.lookCoord2[11] == 0 &&
-                    this.lookCoord2[0] == 0 &&
-                    this.lookCoord2[1] == 0)
-                ) {
+                if (this.lookCoord2[9] < 2 || this.lookCoord2[11] < 2) {
                   this.nextgo = [0, 0];
                 }
                 break;
               case 17:
-                if (
-                  (this.lookCoord2[11] == 0 &&
-                    this.lookCoord2[10] == 0 &&
-                    this.lookCoord2[9] == 0) ||
-                  (this.lookCoord2[1] == 0 &&
-                    this.lookCoord2[2] == 0 &&
-                    this.lookCoord2[3] == 0)
-                ) {
+                if (this.lookCoord2[11] < 2 || this.lookCoord2[1] < 2) {
                   this.nextgo = [0, 0];
                 }
                 break;
@@ -185,6 +143,9 @@ class Robot {
   }
 
   movePhase() {
+    if(this.nextgo[0] == 0 && this.nextgo[1] == 0){
+      return false;
+    }
     rm_relative(this.x, this.y, this.id);
     setrtb_relative(this.x + this.nextgo[0], this.y + this.nextgo[1], this.id);
     this.x += this.nextgo[0];
@@ -202,7 +163,7 @@ function compare(now, rule) {
     if (
       now[i] != Math.ceil(rule[i]) &&
       now[i] != Math.floor(rule[i]) &&
-      rule[i] != 'A'
+      rule[i] != "A"
     ) {
       return false;
     }

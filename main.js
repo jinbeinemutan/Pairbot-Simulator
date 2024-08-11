@@ -38,7 +38,7 @@ document.getElementById("round").onsubmit = function (event) {
   if (intervalId) {
     clearInterval(intervalId); // タイマーが動いている場合は停止する
     intervalId = null; // タイマーIDをクリアする
-    document.getElementById("isrunning").textContent = "タイマーストップ";
+    document.getElementById("AAA").value = "AutoMode start";
   }
   roudn1();
 };
@@ -48,7 +48,7 @@ document.getElementById("round").onsubmit = function (event) {
 //   if (intervalId) {
 //     clearInterval(intervalId); // タイマーが動いている場合は停止する
 //     intervalId = null; // タイマーIDをクリアする
-//     document.getElementById("isrunning").textContent = "タイマーストップ";
+//     document.getElementById("AAA").value = "AutoMode start";
 //   }
 
 //   if (pairArrayHistory.length > 0) {
@@ -73,13 +73,13 @@ document.getElementById("all_delete").onsubmit = function (event) {
   if (intervalId) {
     clearInterval(intervalId); // タイマーが動いている場合は停止する
     intervalId = null; // タイマーIDをクリアする
-    document.getElementById("isrunning").textContent = "タイマーストップ";
+    document.getElementById("AAA").value = "AutoMode start";
   }
   pairArray = [];
   pairArrayHistory = [];
   // rtbArray.length = 1;
-  for (let i = 0; i < 21; i++) {
-    for (let j = 0; j < 13; j++) {
+  for (let i = 0; i < rtb_w; i++) {
+    for (let j = 0; j < rtb_h; j++) {
       rtb[i][j].length = 1;
     }
   }
@@ -92,21 +92,22 @@ document.getElementById("auto").onsubmit = function (event) {
   if (intervalId) {
     clearInterval(intervalId); // タイマーが動いている場合は停止する
     intervalId = null; // タイマーIDをクリアする
-    document.getElementById("isrunning").textContent = "タイマーストップ";
+    document.getElementById("AAA").value = "AutoMode start";
   } else {
     intervalId = setInterval(
       roudn1,
       1000 - document.getElementById("speed").value
     ); // タイマーが停止している場合は開始する
-    document.getElementById("isrunning").textContent = "タイマースタート";
+    document.getElementById("AAA").value = "AutoMode end";
   }
 };
+
 
 let SyncSelect = document.getElementById("SYNC");
 SyncSelect.options[0].selected = true;
 SyncSelect.addEventListener("change", function () {
   switch (SyncSelect.value) {
-    case "leaderElection":
+    case "FSYNC":
       SYNC = "F";
       break;
     case "SSYNC":
@@ -155,6 +156,15 @@ DDSelect.addEventListener("change", function () {
 
 // 仮
 function roudn1() {
+  if (isSolved() && nowAlgo == rules3) {
+    window.alert("note: Leader Election Problem has been solved");
+    if (intervalId) {
+      clearInterval(intervalId); // タイマーが動いている場合は停止する
+      intervalId = null; // タイマーIDをクリアする
+      document.getElementById("AAA").value = "AutoMode start";
+    }
+    return 0;
+  }
   if (SYNC == "A") {
     for (let i = 0; i < 3; i++) {
       let r = Math.floor(Math.random() * pairArray.length);
@@ -199,8 +209,8 @@ function roudn1() {
 
 function pairArrayToRrtb(pairArray) {
   //  JSON.parse(JSON.stringify(pairArray));
-  for (let i = 0; i < 21; i++) {
-    for (let j = 0; j < 13; j++) {
+  for (let i = 0; i < rtb_w; i++) {
+    for (let j = 0; j < rtb_h; j++) {
       rtb[i][j] = [0];
     }
   }
@@ -215,5 +225,41 @@ function pairArrayToRrtb(pairArray) {
       pairArray[i].robB.y,
       pairArray[i].robB.id
     );
+  }
+}
+
+function isSolved() {
+  let shortcount = [];
+  for (let i = 0; i < pairArray.length; i++) {
+    if (!pairArray[i].getIsLong()) {
+      shortcount.push(i);
+    }
+  }
+  if (shortcount.length <= 3) {
+    if (shortcount.length < 3) {
+      return true;
+    }
+    return !(
+      Math.abs(
+        pairArray[shortcount[0]].robA.x - pairArray[shortcount[1]].robA.x
+      ) > 1 ||
+      Math.abs(
+        pairArray[shortcount[1]].robA.x - pairArray[shortcount[2]].robA.x
+      ) > 1 ||
+      Math.abs(
+        pairArray[shortcount[2]].robA.x - pairArray[shortcount[0]].robA.x
+      ) > 1 ||
+      Math.abs(
+        pairArray[shortcount[0]].robA.y - pairArray[shortcount[1]].robA.y
+      ) > 1 ||
+      Math.abs(
+        pairArray[shortcount[1]].robA.y - pairArray[shortcount[2]].robA.y
+      ) > 1 ||
+      Math.abs(
+        pairArray[shortcount[2]].robA.y - pairArray[shortcount[0]].robA.y
+      ) > 1
+    );
+  } else {
+    return false;
   }
 }
