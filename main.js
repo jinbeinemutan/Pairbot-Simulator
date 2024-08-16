@@ -8,6 +8,7 @@ let pairArray = []; //全てのpairbotを格納してるリスト
 let pairArrayHistory = []; //pairArrayの履歴のリスト
 
 var intervalId;
+
 let nowAlgo = rules3;
 let SYNC = "F";
 let DD = "week";
@@ -169,7 +170,7 @@ document.getElementById("cheet").onsubmit = function (event) {
 
 // 仮
 function roudn1() {
-  if (isSolved() && nowAlgo == rules3) {
+  if (nowAlgo == rules3 && isSolved()) {
     window.alert("note: Leader Election Problem has been solved");
     if (intervalId) {
       clearInterval(intervalId); // タイマーが動いている場合は停止する

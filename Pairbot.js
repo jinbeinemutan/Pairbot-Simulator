@@ -29,6 +29,9 @@ class Pairbot {
     }
   }
 
+  getIsLong() {
+    return this.isLong;
+  }
   setisLong() {
     this.isLong = this.robA.x != this.robB.x || this.robA.y != this.robB;
   }
@@ -46,9 +49,5 @@ class Pairbot {
         break;
     }
     this.AsyncPhase = (this.AsyncPhase + 1) % 3;
-  }
-
-  getIsLong(){
-    return this.isLong;
   }
 }

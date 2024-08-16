@@ -16,6 +16,7 @@ class Robot {
     //  6 x X x 0
     //   7 x x 11
     //    8 9 10
+    this.nextgoList = [];
     setrtb_relative(x, y, id);
   }
 
@@ -143,7 +144,7 @@ class Robot {
   }
 
   movePhase() {
-    if(this.nextgo[0] == 0 && this.nextgo[1] == 0){
+    if (this.nextgo[0] == 0 && this.nextgo[1] == 0) {
       return false;
     }
     rm_relative(this.x, this.y, this.id);
@@ -155,11 +156,7 @@ class Robot {
 }
 
 function compare(now, rule) {
-  if (now[0] != Math.ceil(rule[0]) && now[0] != Math.floor(rule[0])) {
-    return false;
-  }
-
-  for (let i = 1; i < now.length; i++) {
+  for (let i = 0; i < now.length; i++) {
     if (
       now[i] != Math.ceil(rule[i]) &&
       now[i] != Math.floor(rule[i]) &&
