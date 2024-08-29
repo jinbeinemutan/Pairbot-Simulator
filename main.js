@@ -9,9 +9,9 @@ let pairArrayHistory = []; //pairArrayの履歴のリスト
 
 var intervalId;
 
-let nowAlgo = rules3;
+let nowAlgo = rules4;
 let SYNC = "F";
-let DD = "week";
+let DD = "strong";
 let isCheet = false;
 
 c.drawGrid();
@@ -133,8 +133,11 @@ AlgoSelect.addEventListener("change", function () {
     case "maketriangle":
       nowAlgo = rules2;
       break;
-    case "leaderElection":
+    case "LEP_2hop":
       nowAlgo = rules3;
+      break;
+    case "LEP_1hop":
+      nowAlgo = rules4;
       break;
     default:
       window.alert("error: none of MyAlgo.value is selected");
@@ -142,7 +145,7 @@ AlgoSelect.addEventListener("change", function () {
 });
 
 let DDSelect = document.getElementById("DuplicationDetection");
-DDSelect.options[0].selected = true;
+DDSelect.options[1].selected = true;
 DDSelect.addEventListener("change", function () {
   switch (DDSelect.value) {
     case "strongDD":

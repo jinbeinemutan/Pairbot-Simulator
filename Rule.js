@@ -54,6 +54,7 @@ let rules3 = [
   [0, 2, 2, 2, 1 / 2, 1 / 2, 1 / 2, 2, -1, 0],
 ];
 
+let rules4 = [];
 //[相方の位置,{surround},{nextGo}] // length = 10
 
 //   3 2
