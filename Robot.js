@@ -160,7 +160,12 @@ function compare(now, rule) {
     if (
       now[i] != Math.ceil(rule[i]) &&
       now[i] != Math.floor(rule[i]) &&
-      rule[i] != "A"
+      rule[i] != "A" &&
+      !(rule[i] == "OD" && (now[i] == 2 || now[i] == 0)) &&
+      !(rule[i] == "2<=" && now[i] <= 2) &&
+      !(rule[i] == "3>=" && now[i] >= 3) &&
+      !(rule[i] == "3<=" && now[i] <= 3) &&
+      !(rule[i] == "2>=" && now[i] >= 2)
     ) {
       return false;
     }
