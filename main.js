@@ -139,6 +139,9 @@ AlgoSelect.addEventListener("change", function () {
     case "LEP_1hop":
       nowAlgo = rules4;
       break;
+    case "scattering":
+      nowAlgo = rules5;
+      break;
     default:
       window.alert("error: none of MyAlgo.value is selected");
   }

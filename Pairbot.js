@@ -17,23 +17,18 @@ class Pairbot {
     this.robB.computePhase();
   }
   pairMovePhase() {
-    let isMoveA = false;
-    let isMoveB = false;
     if (this.isLong) {
-      isMoveA = this.robA.movePhase();
+      this.robA.movePhase();
     }
-    isMoveB = this.robB.movePhase();
-
-    if (isMoveA || isMoveB) {
-      this.isLong = !this.isLong;
-    }
+    this.robB.movePhase();
+    this.setIsLong();
   }
 
   getIsLong() {
     return this.isLong;
   }
-  setisLong() {
-    this.isLong = this.robA.x != this.robB.x || this.robA.y != this.robB;
+  setIsLong() {
+    this.isLong = this.robA.x != this.robB.x || this.robA.y != this.robB.y;
   }
 
   ActAsyncPhase() {

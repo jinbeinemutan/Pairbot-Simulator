@@ -27,7 +27,7 @@ class Canvas {
     let half_h = h / 2;
 
     //drawing bold line
-    ctx.strokeStyle = "brack";
+    ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(0, half_h);
@@ -49,7 +49,14 @@ class Canvas {
       ctx.stroke();
     }
 
+    ctx.moveTo(half_w - w_ofset, 0);
+      ctx.lineTo(half_w + w_ofset, h);
+      ctx.moveTo(w - half_w - w_ofset, 0);
+      ctx.lineTo(w - half_w + w_ofset, h);
+      ctx.stroke();
+
     while (half_w + w_ofset > 0) {
+      half_w -= 2 * a;
       ctx.beginPath();
       ctx.moveTo(half_w + w_ofset, 0);
       ctx.lineTo(half_w - w_ofset, h);
@@ -60,8 +67,7 @@ class Canvas {
       ctx.lineTo(half_w + w_ofset, h);
       ctx.moveTo(w - half_w - w_ofset, 0);
       ctx.lineTo(w - half_w + w_ofset, h);
-      ctx.stroke();
-      half_w -= 2 * a;
+      ctx.stroke();    
     }
   }
 
