@@ -145,6 +145,22 @@ class Robot {
           }
         }
       }
+    } else if (nowAlgo == rules6) {
+      for (let i = 0; i < nowAlgo.length; i++) {
+        if (compare(now, nowAlgo[i])) {
+          if (i == 0 || i == 7) {
+            let N = nowAlgo[i][Math.round(Math.random()) + 8];
+            console.log(i);
+            this.nextgo[0] = N[0];
+            this.nextgo[1] = N[1];
+          } else {
+            console.log(i);
+            this.nextgo[0] = nowAlgo[i][8];
+            this.nextgo[1] = nowAlgo[i][9];
+          }
+          break;
+        }
+      }
     } else {
       for (let i = 0; i < nowAlgo.length; i++) {
         if (compare(now, nowAlgo[i])) {

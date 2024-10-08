@@ -9,7 +9,7 @@ let pairArrayHistory = []; //pairArrayの履歴のリスト
 
 var intervalId;
 
-let nowAlgo = rules4;
+let nowAlgo = rules6;
 let SYNC = "F";
 let DD = "strong";
 let isCheet = false;
@@ -142,6 +142,8 @@ AlgoSelect.addEventListener("change", function () {
     case "scattering":
       nowAlgo = rules5;
       break;
+    case "LEP_1hop_x":
+      nowAlgo = rules6;
     default:
       window.alert("error: none of MyAlgo.value is selected");
   }
