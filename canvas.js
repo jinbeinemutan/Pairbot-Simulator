@@ -100,7 +100,6 @@ class Canvas {
                 300 - y * a * Math.sqrt(3) - pile * 10
               );
             }
-
             pile++;
           }
         }

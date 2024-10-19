@@ -166,6 +166,7 @@ class Robot {
         if (compare(now, nowAlgo[i])) {
           this.nextgo[0] = nowAlgo[i][8];
           this.nextgo[1] = nowAlgo[i][9];
+          console.log(this.id + ": rule " + i);
           break;
         }
       }

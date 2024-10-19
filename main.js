@@ -9,7 +9,7 @@ let pairArrayHistory = []; //pairArrayの履歴のリスト
 
 var intervalId;
 
-let nowAlgo = rules6;
+let nowAlgo = rules7;
 let SYNC = "F";
 let DD = "strong";
 let isCheet = false;
@@ -144,6 +144,10 @@ AlgoSelect.addEventListener("change", function () {
       break;
     case "LEP_1hop_x":
       nowAlgo = rules6;
+      break;
+    case "LEP_1hop_xy_test":
+      nowAlgo = rules7;
+      break;
     default:
       window.alert("error: none of MyAlgo.value is selected");
   }
@@ -226,6 +230,7 @@ function roudn1() {
     }
     c.drawGrid();
     c.drawRobot();
+    console.log("\n");
   }
 }
 
