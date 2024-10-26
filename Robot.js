@@ -83,7 +83,7 @@ class Robot {
     now.push(this.whereispair);
     now = now.concat(this.lookCoord);
 
-    if (nowAlgo == rules3) {
+    if (nowAlgo == R_LEP_2hop) {
       for (let i = 0; i < nowAlgo.length; i++) {
         if (compare(now, nowAlgo[i])) {
           if (i >= 6 && i <= 11) {
@@ -132,7 +132,7 @@ class Robot {
           }
         }
       }
-    } else if (nowAlgo == rules5) {
+    } else if (nowAlgo == R_scattering) {
       for (let i = 0; i < nowAlgo.length; i++) {
         if (compare(now, nowAlgo[i])) {
           if (i >= 6 && i <= 11) {
@@ -145,16 +145,15 @@ class Robot {
           }
         }
       }
-    } else if (nowAlgo == rules6) {
+    } else if (nowAlgo == R_LEP_x_polygon) {
       for (let i = 0; i < nowAlgo.length; i++) {
         if (compare(now, nowAlgo[i])) {
-          if (i == 0 || i == 7) {
+          console.log(this.id + ": rule " + i);
+          if (i == 0) {
             let N = nowAlgo[i][Math.round(Math.random()) + 8];
-            console.log(i);
             this.nextgo[0] = N[0];
             this.nextgo[1] = N[1];
           } else {
-            console.log(i);
             this.nextgo[0] = nowAlgo[i][8];
             this.nextgo[1] = nowAlgo[i][9];
           }

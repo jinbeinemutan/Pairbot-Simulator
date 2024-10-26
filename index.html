@@ -9,7 +9,7 @@
   <body>
     <h1>Pairbot_Sym (β版)</h1>
     <h3>click to arrange a pairbot below</h3>
-    <canvas id="gridCanvas" width="900" height="600"></canvas>
+    <canvas id="gridCanvas" width="1500" height="600"></canvas>
     <br />
     <form id="round">
       <input type="submit" value="act 1round" />
@@ -25,9 +25,9 @@
       ><input
         type="range"
         id="speed"
-        min="0"
-        max="950"
-        value="750"
+        min="400"
+        max="1000"
+        value="800"
       />speed</label
     >
     <br />
@@ -37,9 +37,9 @@
     <br />
 
     <select id="myAlgo">
-      <option value="LEP_1hop_xy_test">視野1のLEP 疑似直線</option>
-      <option value="LEP_1hop_x">視野1のLEP X軸合意</option>
-      <option value="LEP_1hop">視野1のLEP(凸多角形)</option>
+      <option value="makeLine_x">直線形成 X軸合意</option>
+      <option value="LEP_x_polygon">LEP X軸合意 凸多角形空洞あり</option>
+      <option value="LEP_polygon">LEP(凸多角形)</option>
       <option value="LEP_2hop">視野2のLEP</option>
       <option value="scattering">scattering</option>
       <option value="makeLine">直線形成</option>

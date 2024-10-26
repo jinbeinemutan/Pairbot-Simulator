@@ -1,10 +1,10 @@
 //global 変数
-const w = 900;
+const w = 1500;
 const h = 600;
 const a = 30; //1:2:Math.sqrt(3)の1
 const w_ofset = ((h / 2) * Math.sqrt(3)) / 3;
 const rtb_h = 17;
-const rtb_w = 25;
+const rtb_w = 35;
 let rtb;
 
 class Canvas {
@@ -84,8 +84,8 @@ class Canvas {
             let y = j - Math.floor(rtb_h / 2);
             ctx.beginPath();
             ctx.arc(
-              450 + a * (x * Math.round(Math.sqrt(3)) + y),
-              300 - y * a * Math.sqrt(3) - pile * 10,
+              w/2 + a * (x * Math.round(Math.sqrt(3)) + y),
+              h/2 - y * a * Math.sqrt(3) - pile * 10,
               18,
               0,
               Math.PI * 2
@@ -96,8 +96,8 @@ class Canvas {
               ctx.fillStyle = "black";
               ctx.fillText(
                 rtb[i][j][k],
-                450 + a * (x * Math.round(Math.sqrt(3)) + y),
-                300 - y * a * Math.sqrt(3) - pile * 10
+                w/2 + a * (x * Math.round(Math.sqrt(3)) + y),
+                h/2 - y * a * Math.sqrt(3) - pile * 10
               );
             }
             pile++;

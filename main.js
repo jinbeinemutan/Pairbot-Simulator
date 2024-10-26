@@ -9,7 +9,7 @@ let pairArrayHistory = []; //pairArrayの履歴のリスト
 
 var intervalId;
 
-let nowAlgo = rules7;
+let nowAlgo = R_LEP_x_polygon;
 let SYNC = "F";
 let DD = "strong";
 let isCheet = false;
@@ -124,29 +124,29 @@ SyncSelect.addEventListener("change", function () {
 });
 
 let AlgoSelect = document.getElementById("myAlgo");
-AlgoSelect.options[0].selected = true;
+AlgoSelect.options[1].selected = true;
 AlgoSelect.addEventListener("change", function () {
   switch (AlgoSelect.value) {
-    case "makeLine":
-      nowAlgo = rules;
+    case "makeLine_x":
+      nowAlgo = R_makeLine_x;
       break;
-    case "maketriangle":
-      nowAlgo = rules2;
+    case "LEP_x_polygon":
+      nowAlgo = R_LEP_x_polygon;
+      break;
+    case "LEP_polygon":
+      nowAlgo = R_LEP_xy_polygon;
       break;
     case "LEP_2hop":
-      nowAlgo = rules3;
-      break;
-    case "LEP_1hop":
-      nowAlgo = rules4;
+      nowAlgo = R_LEP_2hop;
       break;
     case "scattering":
-      nowAlgo = rules5;
+      nowAlgo = R_scattering;
       break;
-    case "LEP_1hop_x":
-      nowAlgo = rules6;
+    case "maketriangle":
+      nowAlgo = R_maketriangle_xy;
       break;
-    case "LEP_1hop_xy_test":
-      nowAlgo = rules7;
+    case "makeLine":
+      nowAlgo = R_makeLine_xy;
       break;
     default:
       window.alert("error: none of MyAlgo.value is selected");
@@ -182,7 +182,7 @@ document.getElementById("cheet").onsubmit = function (event) {
 
 // 仮
 function roudn1() {
-  if (nowAlgo == rules3 && isSolved()) {
+  if (nowAlgo == R_LEP_2hop && isSolved()) {
     window.alert("note: Leader Election Problem has been solved");
     if (intervalId) {
       clearInterval(intervalId); // タイマーが動いている場合は停止する
