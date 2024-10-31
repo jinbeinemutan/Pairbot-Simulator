@@ -145,7 +145,7 @@ class Robot {
           }
         }
       }
-    } else if (nowAlgo == R_LEP_x_polygon) {
+    } else if (nowAlgo == R_LEP_x_polygon || nowAlgo == R_makeLine_x) {
       for (let i = 0; i < nowAlgo.length; i++) {
         if (compare(now, nowAlgo[i])) {
           console.log(this.id + ": rule " + i);
