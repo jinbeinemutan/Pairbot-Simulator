@@ -9,7 +9,7 @@ let pairArrayHistory = []; //pairArrayの履歴のリスト
 
 var intervalId;
 
-let nowAlgo = R_LEP_x_polygon;
+let nowAlgo = R_kim;
 let SYNC = "F";
 let DD = "strong";
 let isCheet = false;
@@ -124,7 +124,7 @@ SyncSelect.addEventListener("change", function () {
 });
 
 let AlgoSelect = document.getElementById("myAlgo");
-AlgoSelect.options[1].selected = true;
+AlgoSelect.options[4].selected = true;
 AlgoSelect.addEventListener("change", function () {
   switch (AlgoSelect.value) {
     case "makeLine_x":
@@ -139,8 +139,8 @@ AlgoSelect.addEventListener("change", function () {
     case "LEP_2hop":
       nowAlgo = R_LEP_2hop;
       break;
-    case "scattering":
-      nowAlgo = R_scattering;
+    case "kim":
+      nowAlgo = R_kim;
       break;
     case "maketriangle":
       nowAlgo = R_maketriangle_xy;
