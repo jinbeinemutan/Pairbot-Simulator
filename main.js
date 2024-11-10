@@ -9,7 +9,7 @@ let pairArrayHistory = []; //pairArrayの履歴のリスト
 
 var intervalId;
 
-let nowAlgo = R_kim;
+let nowAlgo = R_LEP_x;
 let SYNC = "F";
 let DD = "strong";
 let isCheet = false;
@@ -139,8 +139,8 @@ AlgoSelect.addEventListener("change", function () {
     case "LEP_2hop":
       nowAlgo = R_LEP_2hop;
       break;
-    case "kim":
-      nowAlgo = R_kim;
+    case "LEP_x":
+      nowAlgo = R_LEP_x;
       break;
     case "maketriangle":
       nowAlgo = R_maketriangle_xy;

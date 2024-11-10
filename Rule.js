@@ -110,7 +110,7 @@ let R_LEP_xy_polygon = [
   // [0, 3, "A", "A", "3>=", "A", "A", "A", 1, -1],
 ];
 
-let R_kim = [
+let R_LEP_x = [
   //rule1
   [0, 2, 0, 2, "A", "A", "A", 2, 1, 0],
   //rule4
