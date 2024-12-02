@@ -50,10 +50,10 @@ class Canvas {
     }
 
     ctx.moveTo(half_w - w_ofset, 0);
-      ctx.lineTo(half_w + w_ofset, h);
-      ctx.moveTo(w - half_w - w_ofset, 0);
-      ctx.lineTo(w - half_w + w_ofset, h);
-      ctx.stroke();
+    ctx.lineTo(half_w + w_ofset, h);
+    ctx.moveTo(w - half_w - w_ofset, 0);
+    ctx.lineTo(w - half_w + w_ofset, h);
+    ctx.stroke();
 
     while (half_w + w_ofset > 0) {
       half_w -= 2 * a;
@@ -67,7 +67,7 @@ class Canvas {
       ctx.lineTo(half_w + w_ofset, h);
       ctx.moveTo(w - half_w - w_ofset, 0);
       ctx.lineTo(w - half_w + w_ofset, h);
-      ctx.stroke();    
+      ctx.stroke();
     }
   }
 
@@ -84,8 +84,8 @@ class Canvas {
             let y = j - Math.floor(rtb_h / 2);
             ctx.beginPath();
             ctx.arc(
-              w/2 + a * (x * Math.round(Math.sqrt(3)) + y),
-              h/2 - y * a * Math.sqrt(3) - pile * 10,
+              w / 2 + a * (x * Math.round(Math.sqrt(3)) + y),
+              h / 2 - y * a * Math.sqrt(3) - pile * 10,
               18,
               0,
               Math.PI * 2
@@ -96,8 +96,8 @@ class Canvas {
               ctx.fillStyle = "black";
               ctx.fillText(
                 rtb[i][j][k],
-                w/2 + a * (x * Math.round(Math.sqrt(3)) + y),
-                h/2 - y * a * Math.sqrt(3) - pile * 10
+                w / 2 + a * (x * Math.round(Math.sqrt(3)) + y),
+                h / 2 - y * a * Math.sqrt(3) - pile * 10
               );
             }
             pile++;
@@ -129,8 +129,8 @@ function rm_relative(x, y, id) {
 }
 
 //仮の色
-function randomColor(id) {
-  switch (id % 8) {
+function randomColor(c) {
+  switch (c % 8) {
     case 0:
       ctx.fillStyle = "#ffffff";
       break;

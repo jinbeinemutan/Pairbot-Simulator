@@ -12,6 +12,7 @@ var intervalId;
 let nowAlgo = R_LEP_x;
 let SYNC = "F";
 let DD = "strong";
+let globalColor = 0;
 let isCheet = false;
 
 c.drawGrid();
@@ -26,7 +27,9 @@ canvas.addEventListener("click", function (event) {
   let yh = Math.round((h / 2 - y) / (a * Math.sqrt(3)));
   let xw = Math.round((x - w / 2 - a * yh) / (2 * a));
   if (getrtb_relative(xw, yh).length == 1) {
-    pairArray.push(new Pairbot(xw, yh, pairArray.length + 1));
+    pairArray.push(
+      new Pairbot(xw, yh, pairArray.length + 1, globalColor)
+    );
     // pairArrayHistory.push(JSON.parse(JSON.stringify(pairArray)));
     // pairArrayHistory.push(pairArray.map( list => ({...list})));
     // Objectを作り直すしかないか？
@@ -179,6 +182,42 @@ document.getElementById("cheet").onsubmit = function (event) {
   c.drawGrid();
   c.drawRobot();
 };
+
+let ColorSelect = document.getElementById("PairbotColor");
+ColorSelect.options[0].selected = true;
+ColorSelect.addEventListener("change", function () {
+  switch (ColorSelect.value) {
+    case "all":
+      globalColor = (pairArray.length + 1) % 8;
+      break;
+    case "white":
+      globalColor = 0;
+      break;
+    case "red":
+      globalColor = 1;
+      break;
+    case "green":
+      globalColor = 2;
+      break;
+    case "blue":
+      globalColor = 3;
+      break;
+    case "yellow":
+      globalColor = 4;
+      break;
+    case "purple":
+      globalColor = 5;
+      break;
+    case "cyan":
+      globalColor = 6;
+      break;
+    case "grey":
+      globalColor = 7;
+      break;
+    default:
+      window.alert("error: none of color.value is selected");
+  }
+});
 
 // 仮
 function roudn1() {
