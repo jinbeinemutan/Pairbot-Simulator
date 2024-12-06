@@ -12,7 +12,7 @@ var intervalId;
 let nowAlgo = R_LEP_x;
 let SYNC = "F";
 let DD = "strong";
-let globalColor = 0;
+let globalColor = "#ff0000";
 let isCheet = false;
 
 c.drawGrid();
@@ -27,16 +27,17 @@ canvas.addEventListener("click", function (event) {
   let yh = Math.round((h / 2 - y) / (a * Math.sqrt(3)));
   let xw = Math.round((x - w / 2 - a * yh) / (2 * a));
   if (getrtb_relative(xw, yh).length == 1) {
-    pairArray.push(
-      new Pairbot(xw, yh, pairArray.length + 1, globalColor)
-    );
+    if (ColorSelect.options[0].selected) {
+      setGlobalColor();
+    }
+    pairArray.push(new Pairbot(xw, yh, pairArray.length + 1, globalColor));
+
     // pairArrayHistory.push(JSON.parse(JSON.stringify(pairArray)));
     // pairArrayHistory.push(pairArray.map( list => ({...list})));
     // Objectを作り直すしかないか？
     // console.log(pairArrayHistory);
   }
-  c.drawGrid();
-  c.drawRobot();
+  doDrawFuncs();
 });
 
 document.getElementById("round").onsubmit = function (event) {
@@ -89,8 +90,7 @@ document.getElementById("all_delete").onsubmit = function (event) {
       rtb[i][j].length = 1;
     }
   }
-  c.drawGrid();
-  c.drawRobot();
+  doDrawFuncs();
 };
 
 document.getElementById("auto").onsubmit = function (event) {
@@ -179,8 +179,7 @@ document.getElementById("cheet").onsubmit = function (event) {
     document.getElementById("cheetbotan").value = "Cheet ON";
   }
   isCheet = !isCheet;
-  c.drawGrid();
-  c.drawRobot();
+  doDrawFuncs();
 };
 
 let ColorSelect = document.getElementById("PairbotColor");
@@ -188,37 +187,72 @@ ColorSelect.options[0].selected = true;
 ColorSelect.addEventListener("change", function () {
   switch (ColorSelect.value) {
     case "all":
-      globalColor = (pairArray.length + 1) % 8;
+      setGlobalColor();
       break;
     case "white":
-      globalColor = 0;
+      globalColor = "#ffffff";
       break;
     case "red":
-      globalColor = 1;
+      globalColor = "red";
       break;
     case "green":
-      globalColor = 2;
+      globalColor = "#00ff00";
       break;
     case "blue":
-      globalColor = 3;
+      globalColor = "#0000ff";
       break;
     case "yellow":
-      globalColor = 4;
+      globalColor = "yellow";
       break;
     case "purple":
-      globalColor = 5;
+      globalColor = "#ff00ff";
       break;
     case "cyan":
-      globalColor = 6;
+      globalColor = "#00ffff";
       break;
     case "grey":
-      globalColor = 7;
+      globalColor = "grey";
       break;
     default:
       window.alert("error: none of color.value is selected");
   }
 });
 
+function setGlobalColor() {
+  switch ((pairArray.length + 1) % 8) {
+    case 0:
+      globalColor = "#ffffff";
+      break;
+    case 1:
+      globalColor = "red";
+      break;
+    case 2:
+      globalColor = "#00ff00";
+      break;
+    case 3:
+      globalColor = "#0000ff";
+      break;
+    case 4:
+      globalColor = "#ffff00";
+      break;
+    case 5:
+      globalColor = "#ff00ff";
+      break;
+    case 6:
+      globalColor = "#00ffff";
+      break;
+    case 7:
+      globalColor = "grey";
+      break;
+  }
+}
+
+function doDrawFuncs(){
+  IsLeader();
+  c.drawGrid();
+  c.drawPairbotLine();
+  c.drawRobot();
+}
 // 仮
 function roudn1() {
   if (nowAlgo == R_LEP_2hop && isSolved()) {
@@ -235,8 +269,7 @@ function roudn1() {
       let r = Math.floor(Math.random() * pairArray.length);
       pairArray[r].ActAsyncPhase();
     }
-    c.drawGrid();
-    c.drawRobot();
+    doDrawFuncs();
   } else {
     if (SYNC == "F") {
       for (let i = 0; i < pairArray.length; i++) {
@@ -267,9 +300,29 @@ function roudn1() {
         pairArray[i].pairMovePhase();
       }
     }
-    c.drawGrid();
-    c.drawRobot();
+    doDrawFuncs();
+
     console.log("\n");
+  }
+}
+
+function IsLeader() {
+  if (nowAlgo == R_LEP_x) {
+    for (let i = 0; i < pairArray.length; i++) {
+      let x = pairArray[i].robA.x;
+      let y = pairArray[i].robA.y;
+      if (!pairArray[i].getIsLong()) {
+        if (
+          getrtb_relative(x + 1, y).length == 1 &&
+          getrtb_relative(x, y + 1).length == 1 &&
+          getrtb_relative(x + 1, y - 1).length == 1
+        ) {
+          pairArray[i].color = "red";
+        } else {
+          pairArray[i].color = "#BBBBBB";
+        }
+      }
+    }
   }
 }
 

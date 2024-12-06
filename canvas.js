@@ -71,6 +71,62 @@ class Canvas {
     }
   }
 
+  drawPairbotLine() {
+    for (let i = 0; i < pairArray.length; i++) {
+      let robAx = pairArray[i].robA.x;
+      let robAy = pairArray[i].robA.y;
+      let robBx = pairArray[i].robB.x;
+      let robBy = pairArray[i].robB.y;
+      //力技
+      let pileAOfNode = //robAのいる座標の下に何台ロボットがいるか調べる
+        rtb[Math.floor(rtb_w / 2) + robAx][Math.floor(rtb_h / 2) + robAy];
+      let tmp;
+      for (tmp = 1; tmp < pileAOfNode.length; tmp++) {
+        //rtbは最初から0が入っている(gm)
+        if (pileAOfNode[tmp] == pairArray[i].id) {
+          break;
+        }
+      }
+      let pileBOfNode = //robBのいる座標の下に何台ロボットがいるか調べる
+        rtb[Math.floor(rtb_w / 2) + robBx][Math.floor(rtb_h / 2) + robBy];
+      let foo;
+      for (foo = 1; foo < pileBOfNode.length; foo++) {
+        //rtbは最初から0が入っている(gm)
+        if (pileBOfNode[foo] == pairArray[i].id) {
+          break;
+        }
+      }
+      let pileA = tmp - 1;
+      let pileB = foo - 1;
+
+      //draw Line
+      ctx.lineWidth = 10;
+      ctx.strokeStyle = "black";
+      ctx.beginPath();
+      ctx.moveTo(
+        w / 2 + a * (robAx * Math.round(Math.sqrt(3)) + robAy),
+        h / 2 - robAy * a * Math.sqrt(3) - pileA * 10
+      );
+      ctx.lineTo(
+        w / 2 + a * (robBx * Math.round(Math.sqrt(3)) + robBy),
+        h / 2 - robBy * a * Math.sqrt(3) - pileB * 10
+      );
+      ctx.stroke();
+      ctx.lineWidth = 8;
+      ctx.strokeStyle = pairArray[i].color;
+      ctx.beginPath();
+      ctx.moveTo(
+        w / 2 + a * (robAx * Math.round(Math.sqrt(3)) + robAy),
+        h / 2 - robAy * a * Math.sqrt(3) - pileA * 10
+      );
+      ctx.lineTo(
+        w / 2 + a * (robBx * Math.round(Math.sqrt(3)) + robBy),
+        h / 2 - robBy * a * Math.sqrt(3) - pileB * 10
+      );
+      ctx.stroke();
+    }
+  }
+
   drawRobot() {
     ctx.lineWidth = 5;
     ctx.strokeStyle = "black";
@@ -79,7 +135,10 @@ class Canvas {
         let pile = 0;
         for (let k = 0; k < rtb[i][j].length; k++) {
           if (rtb[i][j][k] != 0) {
-            randomColor(rtb[i][j][k]);
+            // randomColor(rtb[i][j][k]);
+            // console.log(rtb);
+            // console.log(pairArray);
+            ctx.fillStyle = pairArray[rtb[i][j][k] - 1].color;
             let x = i - Math.floor(rtb_w / 2);
             let y = j - Math.floor(rtb_h / 2);
             ctx.beginPath();

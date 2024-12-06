@@ -1,6 +1,6 @@
 class Robot {
   //相対座標で入力
-  constructor(x, y, id,color) {
+  constructor(x, y, id) {
     this.id = id;
     this.x = x;
     this.y = y;
@@ -17,7 +17,6 @@ class Robot {
     //   7 x x 11
     //    8 9 10
     this.nextgoList = [];
-    this.color = color;
     setrtb_relative(x, y, id);
   }
 
