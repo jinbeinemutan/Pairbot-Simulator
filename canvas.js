@@ -100,7 +100,7 @@ class Canvas {
       let pileB = foo - 1;
 
       //draw Line
-      ctx.lineWidth = 10;
+      ctx.lineWidth = 13;
       ctx.strokeStyle = "black";
       ctx.beginPath();
       ctx.moveTo(
@@ -112,7 +112,7 @@ class Canvas {
         h / 2 - robBy * a * Math.sqrt(3) - pileB * 10
       );
       ctx.stroke();
-      ctx.lineWidth = 8;
+      ctx.lineWidth = 9;
       ctx.strokeStyle = pairArray[i].color;
       ctx.beginPath();
       ctx.moveTo(
@@ -135,9 +135,6 @@ class Canvas {
         let pile = 0;
         for (let k = 0; k < rtb[i][j].length; k++) {
           if (rtb[i][j][k] != 0) {
-            // randomColor(rtb[i][j][k]);
-            // console.log(rtb);
-            // console.log(pairArray);
             ctx.fillStyle = pairArray[rtb[i][j][k] - 1].color;
             let x = i - Math.floor(rtb_w / 2);
             let y = j - Math.floor(rtb_h / 2);
@@ -187,32 +184,3 @@ function rm_relative(x, y, id) {
   }
 }
 
-//仮の色
-function randomColor(c) {
-  switch (c % 8) {
-    case 0:
-      ctx.fillStyle = "#ffffff";
-      break;
-    case 1:
-      ctx.fillStyle = "#ff0000";
-      break;
-    case 2:
-      ctx.fillStyle = "#00ff00";
-      break;
-    case 3:
-      ctx.fillStyle = "#0000ff";
-      break;
-    case 4:
-      ctx.fillStyle = "#ffff00";
-      break;
-    case 5:
-      ctx.fillStyle = "#ff00ff";
-      break;
-    case 6:
-      ctx.fillStyle = "#00ffff";
-      break;
-    case 7:
-      ctx.fillStyle = "grey";
-      break;
-  }
-}

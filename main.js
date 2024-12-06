@@ -14,6 +14,7 @@ let SYNC = "F";
 let DD = "strong";
 let globalColor = "#ff0000";
 let isCheet = false;
+let isleaderColoring = false;
 
 c.drawGrid();
 c.drawRobot();
@@ -182,6 +183,17 @@ document.getElementById("cheet").onsubmit = function (event) {
   doDrawFuncs();
 };
 
+document.getElementById("leaderColoring").onsubmit = function (event) {
+  event.preventDefault();
+  if (!isleaderColoring) {
+    document.getElementById("leaderColoringbotan").value = "leaderColoring OFF";
+  } else {
+    document.getElementById("leaderColoringbotan").value = "leaderColoring ON";
+  }
+  isleaderColoring = !isleaderColoring;
+  doDrawFuncs();
+};
+
 let ColorSelect = document.getElementById("PairbotColor");
 ColorSelect.options[0].selected = true;
 ColorSelect.addEventListener("change", function () {
@@ -307,7 +319,7 @@ function roudn1() {
 }
 
 function IsLeader() {
-  if (nowAlgo == R_LEP_x) {
+  if (nowAlgo == R_LEP_x && isleaderColoring) {
     for (let i = 0; i < pairArray.length; i++) {
       let x = pairArray[i].robA.x;
       let y = pairArray[i].robA.y;
@@ -319,7 +331,7 @@ function IsLeader() {
         ) {
           pairArray[i].color = "red";
         } else {
-          pairArray[i].color = "#BBBBBB";
+          pairArray[i].color = "#CCCCCC";
         }
       }
     }
