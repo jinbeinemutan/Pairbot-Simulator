@@ -65,7 +65,7 @@ class Robot {
       }
     }
 
-    //自分の周りだけを調べてもし、周りに相方がいなければ、short状態
+    //自分の周りだけを調べて、周りに相方がいなければ、short状態
     this.whereispair = 0;
     for (let i = 1; i < surrounding.length; i++) {
       for (let j = 0; j < surrounding[i].length; j++) {
@@ -135,7 +135,7 @@ class Robot {
     } else if (nowAlgo == R_LEP_x_polygon || nowAlgo == R_makeLine_x) {
       for (let i = 0; i < nowAlgo.length; i++) {
         if (compare(now, nowAlgo[i])) {
-          console.log(this.id + ": rule " + i);
+          // console.log(this.id + ": rule " + i);
           if (i == 0) {
             let N = nowAlgo[i][Math.round(Math.random()) + 8];
             this.nextgo[0] = N[0];
@@ -152,7 +152,7 @@ class Robot {
         if (compare(now, nowAlgo[i])) {
           this.nextgo[0] = nowAlgo[i][8];
           this.nextgo[1] = nowAlgo[i][9];
-          console.log(this.id + ": rule " + i);
+          // console.log(this.id + ": rule " + i);
           break;
         }
       }

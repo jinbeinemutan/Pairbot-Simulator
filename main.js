@@ -175,9 +175,9 @@ DDSelect.addEventListener("change", function () {
 document.getElementById("cheet").onsubmit = function (event) {
   event.preventDefault();
   if (!isCheet) {
-    document.getElementById("cheetbotan").value = "Cheet OFF";
+    document.getElementById("cheetbotan").value = "displayID OFF";
   } else {
-    document.getElementById("cheetbotan").value = "Cheet ON";
+    document.getElementById("cheetbotan").value = "displayID ON";
   }
   isCheet = !isCheet;
   doDrawFuncs();
@@ -186,9 +186,9 @@ document.getElementById("cheet").onsubmit = function (event) {
 document.getElementById("leaderColoring").onsubmit = function (event) {
   event.preventDefault();
   if (!isleaderColoring) {
-    document.getElementById("leaderColoringbotan").value = "leaderColoring OFF";
+    document.getElementById("leaderColoringbotan").value = "LeaderColoring OFF";
   } else {
-    document.getElementById("leaderColoringbotan").value = "leaderColoring ON";
+    document.getElementById("leaderColoringbotan").value = "LeaderColoring ON";
   }
   isleaderColoring = !isleaderColoring;
   doDrawFuncs();

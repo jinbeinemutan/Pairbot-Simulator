@@ -23,22 +23,21 @@ class Canvas {
 
   drawGrid() {
     ctx.clearRect(0, 0, w, h);
-    let half_w = w / 2;
-    let half_h = h / 2;
 
     //drawing bold line
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(0, half_h);
-    ctx.lineTo(w, half_h);
-    ctx.moveTo(half_w + w_ofset, 0);
-    ctx.lineTo(half_w - w_ofset, h);
+    ctx.moveTo(0, h / 2);
+    ctx.lineTo(w, h / 2);
+    ctx.moveTo(w / 2 + w_ofset, 0);
+    ctx.lineTo(w / 2 - w_ofset, h);
     ctx.stroke();
 
     //drawing thin line
     ctx.strokeStyle = "grey";
     ctx.lineWidth = 1;
+    let half_h = h / 2;
     while (half_h > 0) {
       half_h -= a * Math.sqrt(3);
       ctx.beginPath();
@@ -49,12 +48,13 @@ class Canvas {
       ctx.stroke();
     }
 
-    ctx.moveTo(half_w - w_ofset, 0);
-    ctx.lineTo(half_w + w_ofset, h);
-    ctx.moveTo(w - half_w - w_ofset, 0);
-    ctx.lineTo(w - half_w + w_ofset, h);
+    ctx.moveTo(w / 2 - w_ofset, 0);
+    ctx.lineTo(w / 2 + w_ofset, h);
+    ctx.moveTo(w - w / 2 - w_ofset, 0);
+    ctx.lineTo(w - w / 2 + w_ofset, h);
     ctx.stroke();
 
+    let half_w = w / 2;
     while (half_w + w_ofset > 0) {
       half_w -= 2 * a;
       ctx.beginPath();
@@ -77,53 +77,56 @@ class Canvas {
       let robAy = pairArray[i].robA.y;
       let robBx = pairArray[i].robB.x;
       let robBy = pairArray[i].robB.y;
-      //力技
-      let pileAOfNode = //robAのいる座標の下に何台ロボットがいるか調べる
-        rtb[Math.floor(rtb_w / 2) + robAx][Math.floor(rtb_h / 2) + robAy];
-      let tmp;
-      for (tmp = 1; tmp < pileAOfNode.length; tmp++) {
-        //rtbは最初から0が入っている(gm)
-        if (pileAOfNode[tmp] == pairArray[i].id) {
-          break;
+      if (!(robAx == robBx && robAy == robBy)) {
+        //力技
+        let pileAOfNode = //robAのいる座標の下に何台ロボットがいるか調べる
+          rtb[Math.floor(rtb_w / 2) + robAx][Math.floor(rtb_h / 2) + robAy];
+        let tmp;
+        for (tmp = 1; tmp < pileAOfNode.length; tmp++) {
+          //rtbは最初から0が入っている(gm)
+          if (pileAOfNode[tmp] == pairArray[i].id) {
+            break;
+          }
         }
-      }
-      let pileBOfNode = //robBのいる座標の下に何台ロボットがいるか調べる
-        rtb[Math.floor(rtb_w / 2) + robBx][Math.floor(rtb_h / 2) + robBy];
-      let foo;
-      for (foo = 1; foo < pileBOfNode.length; foo++) {
-        //rtbは最初から0が入っている(gm)
-        if (pileBOfNode[foo] == pairArray[i].id) {
-          break;
+        let pileBOfNode = //robBのいる座標の下に何台ロボットがいるか調べる
+          rtb[Math.floor(rtb_w / 2) + robBx][Math.floor(rtb_h / 2) + robBy];
+        let foo;
+        for (foo = 1; foo < pileBOfNode.length; foo++) {
+          //rtbは最初から0が入っている(gm)
+          if (pileBOfNode[foo] == pairArray[i].id) {
+            break;
+          }
         }
-      }
-      let pileA = tmp - 1;
-      let pileB = foo - 1;
+        let pileA = tmp - 1;
+        let pileB = foo - 1;
 
-      //draw Line
-      ctx.lineWidth = 13;
-      ctx.strokeStyle = "black";
-      ctx.beginPath();
-      ctx.moveTo(
-        w / 2 + a * (robAx * Math.round(Math.sqrt(3)) + robAy),
-        h / 2 - robAy * a * Math.sqrt(3) - pileA * 10
-      );
-      ctx.lineTo(
-        w / 2 + a * (robBx * Math.round(Math.sqrt(3)) + robBy),
-        h / 2 - robBy * a * Math.sqrt(3) - pileB * 10
-      );
-      ctx.stroke();
-      ctx.lineWidth = 9;
-      ctx.strokeStyle = pairArray[i].color;
-      ctx.beginPath();
-      ctx.moveTo(
-        w / 2 + a * (robAx * Math.round(Math.sqrt(3)) + robAy),
-        h / 2 - robAy * a * Math.sqrt(3) - pileA * 10
-      );
-      ctx.lineTo(
-        w / 2 + a * (robBx * Math.round(Math.sqrt(3)) + robBy),
-        h / 2 - robBy * a * Math.sqrt(3) - pileB * 10
-      );
-      ctx.stroke();
+        //draw Line
+        //カラーの線を引く前にそれより少し太い黒線を引くと縁取られる
+        ctx.lineWidth = 13;
+        ctx.strokeStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(
+          w / 2 + a * (robAx * Math.round(Math.sqrt(3)) + robAy),
+          h / 2 - robAy * a * Math.sqrt(3) - pileA * 10
+        );
+        ctx.lineTo(
+          w / 2 + a * (robBx * Math.round(Math.sqrt(3)) + robBy),
+          h / 2 - robBy * a * Math.sqrt(3) - pileB * 10
+        );
+        ctx.stroke();
+        ctx.lineWidth = 9;
+        ctx.strokeStyle = pairArray[i].color;
+        ctx.beginPath();
+        ctx.moveTo(
+          w / 2 + a * (robAx * Math.round(Math.sqrt(3)) + robAy),
+          h / 2 - robAy * a * Math.sqrt(3) - pileA * 10
+        );
+        ctx.lineTo(
+          w / 2 + a * (robBx * Math.round(Math.sqrt(3)) + robBy),
+          h / 2 - robBy * a * Math.sqrt(3) - pileB * 10
+        );
+        ctx.stroke();
+      }
     }
   }
 
@@ -183,4 +186,3 @@ function rm_relative(x, y, id) {
     }
   }
 }
-

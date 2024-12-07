@@ -2,17 +2,17 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>Pairbot_sym</title>
+    <title>Pairbot Simulator</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
 
   <body>
-    <h1>Pairbot_Sym (β版)</h1>
-    <h3>click to arrange a pairbot below</h3>
+    <h1>Pairbot Simulator (β版)</h1>
+    <br><br>
     <canvas id="gridCanvas" width="1500" height="600"></canvas>
     <br />
     <form id="round">
-      <input type="submit" value="act 1round" />
+      <input type="submit" value="1cycle" />
     </form>
     <!-- <form id="undo">
       <input type="submit" value="undo" />
@@ -32,7 +32,7 @@
     >
     <br />
     <form id="all_delete">
-      <input type="submit" value="All_delete" />
+      <input type="submit" value="delete all" />
     </form>
     <br />
 
@@ -60,15 +60,14 @@
     <br />
 
     <form id="cheet">
-      <input id="cheetbotan" type="submit" value="Cheet ON" />
+      <input id="cheetbotan" type="submit" value="displayID ON" />
     </form>
     <form id="leaderColoring">
-      <input id="leaderColoringbotan" type="submit" value="leaderColoring ON" />
+      <input id="leaderColoringbotan" type="submit" value="LeaderColoring ON" />
     </form>
 
     <select id="PairbotColor">
-      <option value="all">
-        rainbow</option>
+      <option value="all">rainbow</option>
       <option value="white">white</option>
       <option value="red">red</option>
       <option value="blue">blue</option>
@@ -85,11 +84,8 @@
     <script src="canvas.js"></script>
     <script src="main.js"></script>
 
-  <center>
-    <img src="LEP_rules.png">
-  </center>
-
-
-
+    <center>
+      <img src="LEP_rules.png" />
+    </center>
   </body>
 </html>
