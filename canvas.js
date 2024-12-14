@@ -25,8 +25,10 @@ class Canvas {
     ctx.clearRect(0, 0, w, h);
 
     //drawing bold line
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
+    // ctx.strokeStyle = "black";
+    ctx.strokeStyle = "grey";
+    ctx.lineWidth = 1;
+    // ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(0, h / 2);
     ctx.lineTo(w, h / 2);
@@ -48,10 +50,9 @@ class Canvas {
       ctx.stroke();
     }
 
+    ctx.beginPath();
     ctx.moveTo(w / 2 - w_ofset, 0);
     ctx.lineTo(w / 2 + w_ofset, h);
-    ctx.moveTo(w - w / 2 - w_ofset, 0);
-    ctx.lineTo(w - w / 2 + w_ofset, h);
     ctx.stroke();
 
     let half_w = w / 2;
@@ -73,11 +74,11 @@ class Canvas {
 
   drawPairbotLine() {
     for (let i = 0; i < pairArray.length; i++) {
-      let robAx = pairArray[i].robA.x;
-      let robAy = pairArray[i].robA.y;
-      let robBx = pairArray[i].robB.x;
-      let robBy = pairArray[i].robB.y;
-      if (!(robAx == robBx && robAy == robBy)) {
+      if (pairArray[i].getIsLong()) {
+        let robAx = pairArray[i].robA.x;
+        let robAy = pairArray[i].robA.y;
+        let robBx = pairArray[i].robB.x;
+        let robBy = pairArray[i].robB.y;
         //力技
         let pileAOfNode = //robAのいる座標の下に何台ロボットがいるか調べる
           rtb[Math.floor(rtb_w / 2) + robAx][Math.floor(rtb_h / 2) + robAy];

@@ -41,6 +41,11 @@ canvas.addEventListener("click", function (event) {
   doDrawFuncs();
 });
 
+//test drawing mode
+function drawCanvas(x,y){//共通座標系における(x,y)
+
+}
+
 document.getElementById("round").onsubmit = function (event) {
   event.preventDefault();
   if (intervalId) {
