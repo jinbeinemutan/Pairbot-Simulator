@@ -1,14 +1,14 @@
 class Pairbot {
-  constructor(x, y, id, color) {
+  constructor(x, y, id, color, longdirct) {
     this.robA = new Robot(x, y, id);
-    this.robB = new Robot(x, y, id);
+    this.robB = new Robot(x + longdirct[0], y + longdirct[1], id);
     this.isLong = false;
+    this.setIsLong();
     this.isActivate = false;
     this.AsyncPhase = 0;
     this.color = color;
     this.id = id;
   }
-
   pairLookPhase() {
     this.robA.lookPhase();
     this.robB.lookPhase();

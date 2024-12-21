@@ -15,6 +15,8 @@ let DD = "strong";
 let globalColor = "#ff0000";
 let isCheet = false;
 let isleaderColoring = false;
+let isFreeMode = false;
+let longdirct = [0, 0];
 
 c.drawGrid();
 c.drawRobot();
@@ -27,11 +29,17 @@ canvas.addEventListener("click", function (event) {
 
   let yh = Math.round((h / 2 - y) / (a * Math.sqrt(3)));
   let xw = Math.round((x - w / 2 - a * yh) / (2 * a));
-  if (getrtb_relative(xw, yh).length == 1) {
-    if (ColorSelect.options[0].selected) {
-      setGlobalColor();
-    }
-    pairArray.push(new Pairbot(xw, yh, pairArray.length + 1, globalColor));
+  if (ColorSelect.options[0].selected) {
+    setGlobalColor();
+  }
+  if (isFreeMode) {
+    pairArray.push(
+      new Pairbot(xw, yh, pairArray.length + 1, globalColor, longdirct)
+    );
+  } else if (getrtb_relative(xw, yh).length == 1) {
+    pairArray.push(
+      new Pairbot(xw, yh, pairArray.length + 1, globalColor, [0, 0])
+    );
 
     // pairArrayHistory.push(JSON.parse(JSON.stringify(pairArray)));
     // pairArrayHistory.push(pairArray.map( list => ({...list})));
@@ -42,8 +50,8 @@ canvas.addEventListener("click", function (event) {
 });
 
 //test drawing mode
-function drawCanvas(x,y){//共通座標系における(x,y)
-
+function drawCanvas(x, y) {
+  //共通座標系における(x,y)
 }
 
 document.getElementById("round").onsubmit = function (event) {
@@ -55,31 +63,6 @@ document.getElementById("round").onsubmit = function (event) {
   }
   roudn1();
 };
-
-// document.getElementById("undo").onsubmit = function (event) {
-//   event.preventDefault();
-//   if (intervalId) {
-//     clearInterval(intervalId); // タイマーが動いている場合は停止する
-//     intervalId = null; // タイマーIDをクリアする
-//     document.getElementById("AAA").value = "AutoMode start";
-//   }
-
-//   if (pairArrayHistory.length > 0) {
-//     let temp = pairArrayHistory.pop();
-//     console.log(temp);
-//     // pairArray = JSON.parse(JSON.stringify(temp));
-//     // pairArray = pairArray.map( list => ({...list}));
-//     pairArrayToRrtb(temp);
-//     c.drawGrid();
-//     c.drawRobot();
-//   }
-//   // if (rtbArray.length > 1) {
-//   //   rtb = JSON.parse(JSON.stringify(rtbArray.pop()));
-//   //   console.log(rtb);
-//   //   c.drawGrid();
-//   //   c.drawRobot();
-//   // }
-// };
 
 document.getElementById("all_delete").onsubmit = function (event) {
   event.preventDefault();
@@ -145,6 +128,9 @@ AlgoSelect.addEventListener("change", function () {
     case "LEP_polygon":
       nowAlgo = R_LEP_xy_polygon;
       break;
+    case "OSKB":
+      nowAlgo = R_OSKB;
+      break;
     case "LEP_2hop":
       nowAlgo = R_LEP_2hop;
       break;
@@ -198,6 +184,49 @@ document.getElementById("leaderColoring").onsubmit = function (event) {
   isleaderColoring = !isleaderColoring;
   doDrawFuncs();
 };
+
+document.getElementById("freeMode").onsubmit = function (event) {
+  event.preventDefault();
+  let ele = document.getElementById("PairbotConfig");
+  if (!isFreeMode) {
+    document.getElementById("freeModeBotan").value = "freeMode OFF";
+    ele.style.display = 'block'; 
+  } else {
+    document.getElementById("freeModeBotan").value = "freeMode ON";
+    ele.style.display = 'none';
+  }
+  isFreeMode = !isFreeMode;
+};
+
+let PairbotConfigSelect = document.getElementById("PairbotConfig");
+PairbotConfigSelect.options[0].selected = true;
+PairbotConfigSelect.addEventListener("change", function () {
+  switch (PairbotConfigSelect.value) {
+    case "0":
+      longdirct = [0, 0];
+      break;
+    case "1":
+      longdirct = [0, 1];
+      break;
+    case "3":
+      longdirct = [1, 0];
+      break;
+    case "5":
+      longdirct = [1, -1];
+      break;
+    case "7":
+      longdirct = [0, -1];
+      break;
+    case "9":
+      longdirct = [-1, 0];
+      break;
+    case "11":
+      longdirct = [-1, 1];
+      break;
+    default:
+      window.alert("error: none of PairbotConfig.value is selected");
+  }
+});
 
 let ColorSelect = document.getElementById("PairbotColor");
 ColorSelect.options[0].selected = true;
@@ -264,7 +293,7 @@ function setGlobalColor() {
   }
 }
 
-function doDrawFuncs(){
+function doDrawFuncs() {
   IsLeader();
   c.drawGrid();
   c.drawPairbotLine();

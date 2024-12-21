@@ -8,7 +8,7 @@
 
   <body>
     <h1>Pairbot Simulator (β版)</h1>
-    <br><br>
+    <br /><br />
     <canvas id="gridCanvas" width="1500" height="600"></canvas>
     <br />
     <form id="round">
@@ -39,7 +39,8 @@
     <select id="myAlgo">
       <option value="makeLine_x">直線形成 X軸合意</option>
       <option value="LEP_x_polygon">LEP X軸合意 凸多角形空洞あり</option>
-      <option value="LEP_polygon">LEP(凸多角形)</option>
+      <!-- <option value="LEP_polygon">LEP(凸多角形)</option> -->
+      <option value="OSKB">三角形形成</option>
       <option value="LEP_2hop">視野2のLEP</option>
       <option value="LEP_x">LEP X軸合意</option>
       <option value="makeLine">直線形成</option>
@@ -76,6 +77,19 @@
       <option value="purple">purple</option>
       <option value="cyan">cyan</option>
       <option value="grey">grey</option>
+    </select>
+    <br />
+    <form id="freeMode">
+      <input id="freeModeBotan" type="submit" value="freeMode ON" />
+    </form>
+    <select id="PairbotConfig">
+      <option value="0">short</option>
+      <option value="1">1</option>
+      <option value="3">3</option>
+      <option value="5">5</option>
+      <option value="7">7</option>
+      <option value="9">9</option>
+      <option value="11">11</option>
     </select>
 
     <script src="Rule.js"></script>
