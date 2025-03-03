@@ -257,7 +257,7 @@ ColorSelect.addEventListener("change", function () {
       globalColor = "#00ffff";
       break;
     case "grey":
-      globalColor = "grey";
+      globalColor = "#CCCCCC";
       break;
     default:
       window.alert("error: none of color.value is selected");
@@ -288,7 +288,7 @@ function setGlobalColor() {
       globalColor = "#00ffff";
       break;
     case 7:
-      globalColor = "grey";
+      globalColor = "#CCCCCC";
       break;
   }
 }
